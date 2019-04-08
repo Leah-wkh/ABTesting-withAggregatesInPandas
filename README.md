@@ -1,7 +1,7 @@
 # ABTesting-withAggregatesInPandas
 This CodeCademy project uses aggregate measures in Pandas to analyze data and help a company select the best performing ad in an AB test. There are two different versions of an ad, which have been placed in emails and banner ads on Facebook, Twitter, and Google. The company wants to know how the two ads are performing on each platform on each day of the week. 
 
-Before manipulating the data, I inspect the first 10 lines of the initial dataframe. 
+Before manipulating the data, I inspect the first few lines of the initial dataframe. 
 <img width="795" alt="AB1" src="https://user-images.githubusercontent.com/46868984/55711717-939a6080-59ed-11e9-9665-6bbe281bf2a3.png">
 
 
