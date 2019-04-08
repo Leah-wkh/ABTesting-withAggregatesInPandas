@@ -11,36 +11,41 @@ print(ad_clicks.groupby("utm_source").user_id.count().reset_index())
 #creates new column that will indicate if the ad is clicked as a boolean value
 ad_clicks['is_click'] = ~ad_clicks.ad_click_timestamp.isnull()
 
+#shows percent of people who clicked each ad from each UTM source
 clicks_by_source = ad_clicks.groupby(["utm_source", "is_click"]).user_id.count().reset_index()
 
 print(clicks_by_source)
 
-#pivots table to be more readable
+#pivots above table to be more readable
 clicks_pivot = clicks_by_source.pivot(index = "utm_source", columns = "is_click", values = "user_id"). reset_index()
 
 print(clicks_pivot)
-#adds percent clicked column
+
+#adds new column to more clearly show the percent of users that clicked each add from each UTM source
 clicks_pivot["percent_clicked"] = clicks_pivot[True] / (clicks_pivot[True] + clicks_pivot[False])
 
 print(clicks_pivot)
-# 7 shows count of experimental groups 
+
+#Shows count of users in each experimental group 
 print(ad_clicks.groupby("experimental_group").user_id.count().reset_index())
-#sorts experientmtal groups into False or True where True indicates that the ad was clicked on
+
+#Sorts input from experientmtal groups into False or True where True indicates that the ad was clicked on
 print(ad_clicks.groupby(['experimental_group', 'is_click']).user_id.count().reset_index().pivot(index = 'experimental_group', columns = 'is_click', values = 'user_id').reset_index())
 
+#Initializes two new databases that contain only the infor from each group
 a_clicks = ad_clicks[ad_clicks.experimental_group == 'A']
 b_clicks = ad_clicks[ad_clicks.experimental_group == 'B']
 
+#Indicates which users in the A group clicked each ad by day
 a_clicks_pivot = a_clicks.groupby(['is_click', 'day']).user_id.count().reset_index().pivot(index = 'day', columns = "is_click", values="user_id").reset_index()
-
 a_clicks_pivot["percent_clicked"] = a_clicks_pivot[True] / a_clicks_pivot[True] + a_clicks_pivot[False] 
 
 print(a_clicks_pivot)
 
+#Indicates which users in the B group clicked each ad by day
 b_clicks_pivot = b_clicks.groupby(['is_click', 'day']).user_id.count().reset_index().pivot(index = 'day', columns = "is_click", values="user_id").reset_index()
-
 b_clicks_pivot["percent_clicked"] = b_clicks_pivot[True] / b_clicks_pivot[True] + b_clicks_pivot[False] 
 
 print(b_clicks_pivot)
 
-#A is higher on every day of the week except for Tuesday, so overall, A is the better ad
+#By examining both sets of data, on can see that clicks for ad A is higher on every day of the week except for Tuesday, so overall, A is the better ad
