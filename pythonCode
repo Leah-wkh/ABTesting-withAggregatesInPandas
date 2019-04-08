@@ -21,7 +21,7 @@ clicks_pivot = clicks_by_source.pivot(index = "utm_source", columns = "is_click"
 
 print(clicks_pivot)
 
-#adds new column to more clearly show the percent of users that clicked each add from each UTM source
+#adds new column to more clearly show the percent of users that clicked each ad from each UTM source
 clicks_pivot["percent_clicked"] = clicks_pivot[True] / (clicks_pivot[True] + clicks_pivot[False])
 
 print(clicks_pivot)
@@ -32,7 +32,7 @@ print(ad_clicks.groupby("experimental_group").user_id.count().reset_index())
 #Sorts input from experientmtal groups into False or True where True indicates that the ad was clicked on
 print(ad_clicks.groupby(['experimental_group', 'is_click']).user_id.count().reset_index().pivot(index = 'experimental_group', columns = 'is_click', values = 'user_id').reset_index())
 
-#Initializes two new databases that contain only the infor from each group
+#Initializes two new databases that contain only the info from each group
 a_clicks = ad_clicks[ad_clicks.experimental_group == 'A']
 b_clicks = ad_clicks[ad_clicks.experimental_group == 'B']
 
