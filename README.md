@@ -20,7 +20,7 @@ After pivoting the table, I add new column to more clearly show the percent of u
 
 
 
-To better understand the numbers in the table, I used .groupby() and .count() to show the count of users in each experimental group (A & B). I found that there are 827 users in each group. Next I sorted input from each groups into False or True where True indicates that the ad was clicked on
+To better understand the numbers in the table, I used .groupby() and .count() to show the count of users in each experimental group (A & B). I found that there are 827 users in each group. Next I sorted input from each group into False or True where True indicates that the ad was clicked on
 <img width="795" alt="AB5" src="https://user-images.githubusercontent.com/46868984/55713341-bed27f00-59f0-11e9-852c-ce91f9852867.png">
 
 
